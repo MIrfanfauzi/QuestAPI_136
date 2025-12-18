@@ -103,6 +103,7 @@ fun HomeBody(
             is StatusUiSiswa.Loading -> LoadingScreen()
             is StatusUiSiswa.Success -> DataSiswaList(
                 siswa = statusUiSiswa.siswa,
+                modifier = Modifier.weight(1f),
                 onSiswaClick = onSiswaClick
             )
             is StatusUiSiswa.Error -> ErrorScreen(
@@ -146,8 +147,7 @@ fun DataSiswaList(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        modifier = modifier
-        .fillMaxSize()
+        modifier = modifier.fillMaxWidth()
         .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
     ) {
         items(items = siswa, key = { it.id }) { person ->
