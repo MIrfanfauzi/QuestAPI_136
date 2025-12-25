@@ -101,14 +101,13 @@ fun HomeBody(
     ) {
         when (statusUiSiswa) {
             is StatusUiSiswa.Loading -> LoadingScreen()
-            is StatusUiSiswa.Success -> DataSiswaList(
-                siswa = statusUiSiswa.siswa,
-                modifier = Modifier.weight(1f),
-                onSiswaClick = onSiswaClick
+            is StatusUiSiswa.Success -> DaftarSiswa(
+                itemSiswa = statusUiSiswa.siswa,
+                onSiswaClick = { onSiswaClick(it.id) }
             )
             is StatusUiSiswa.Error -> ErrorScreen(
-                retryAction = retryAction,
-                modifier = Modifier.fillMaxSize()
+                retryAction,
+                modifier = modifier.fillMaxSize()
             )
         }
     }
@@ -157,6 +156,24 @@ fun DataSiswaList(
                     .fillMaxWidth() //  biar card ikut lebar
                     .padding(vertical = dimensionResource(id = R.dimen.padding_small))
                     .clickable { onSiswaClick(person.id) }
+            )
+        }
+    }
+}
+
+@Composable
+fun DaftarSiswa(
+    itemSiswa: List<DataSiswa>,
+    onSiswaClick: (DataSiswa) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(modifier = Modifier) {
+        items(items = itemSiswa, key = { it.id }) { person ->
+            ItemSiswa(
+                siswa = person,
+                modifier = Modifier
+                    .padding(dimensionResource(id = R.dimen.padding_small))
+                    .clickable { onSiswaClick(person) }
             )
         }
     }
