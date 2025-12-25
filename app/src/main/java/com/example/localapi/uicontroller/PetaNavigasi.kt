@@ -13,6 +13,7 @@ import com.example.localapi.uicontroller.route.DestinasiEdit
 import com.example.localapi.uicontroller.route.DestinasiEntry
 import com.example.localapi.uicontroller.route.DestinasiHome
 import com.example.localapi.view.DetailSiswaScreen
+import com.example.localapi.view.EditSiswaScreen
 import com.example.localapi.view.EntrySiswaScreen
 import com.example.localapi.view.HomeScreen
 
@@ -66,6 +67,16 @@ fun HostNavigasi(
                 navigateBack = { navController.navigate(DestinasiHome.route) }
             )
         }
-
+        composable(
+            route = DestinasiEdit.routeWithArgs,
+            arguments = listOf(
+                navArgument(DestinasiEdit.itemIdArg) { type = NavType.IntType }
+            )
+        ) {
+            EditSiswaScreen(
+                navigateBack = { navController.navigate(DestinasiHome.route) },
+                onNavigateUp = { navController.navigateUp() }
+            )
+        }
     }
 }
