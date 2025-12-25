@@ -103,7 +103,7 @@ fun HomeBody(
             is StatusUiSiswa.Loading -> LoadingScreen()
             is StatusUiSiswa.Success -> DaftarSiswa(
                 itemSiswa = statusUiSiswa.siswa,
-                onSiswaClick = { onSiswaClick(it.id) }
+                onSiswaClick = onSiswaClick
             )
             is StatusUiSiswa.Error -> ErrorScreen(
                 retryAction,
@@ -139,32 +139,11 @@ fun ErrorScreen(
     }
 }
 
-@Composable
-fun DataSiswaList(
-    siswa: List<DataSiswa>,
-    onSiswaClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    LazyColumn(
-        modifier = modifier.fillMaxWidth()
-        .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
-    ) {
-        items(items = siswa, key = { it.id }) { person ->
-            ItemSiswa(
-                siswa = person,
-                modifier = Modifier
-                    .fillMaxWidth() //  biar card ikut lebar
-                    .padding(vertical = dimensionResource(id = R.dimen.padding_small))
-                    .clickable { onSiswaClick(person.id) }
-            )
-        }
-    }
-}
 
 @Composable
 fun DaftarSiswa(
     itemSiswa: List<DataSiswa>,
-    onSiswaClick: (DataSiswa) -> Unit,
+    onSiswaClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = Modifier) {
@@ -173,7 +152,7 @@ fun DaftarSiswa(
                 siswa = person,
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.padding_small))
-                    .clickable { onSiswaClick(person) }
+                    .clickable { onSiswaClick(person.id) }
             )
         }
     }
