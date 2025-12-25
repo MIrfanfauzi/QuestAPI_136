@@ -20,4 +20,10 @@ class EditViewModel(
     private val repositoryDataSiswa: RepositoriDataSiswa
 ) : ViewModel() {
 
+    private val idSiswa: Int =
+        checkNotNull(savedStateHandle[DestinasiDetail.itemIdArg])
+
+    var uiStateSiswa by mutableStateOf(UIStateSiswa())
+        private set
+
 }
