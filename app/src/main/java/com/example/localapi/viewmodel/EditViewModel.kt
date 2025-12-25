@@ -26,4 +26,12 @@ class EditViewModel(
     var uiStateSiswa by mutableStateOf(UIStateSiswa())
         private set
 
+    init {
+        viewModelScope.launch {
+            uiStateSiswa = repositoryDataSiswa
+                .getSatuSiswa(idSiswa)
+                .toUiStateSiswa(true)
+        }
+    }
+
 }
