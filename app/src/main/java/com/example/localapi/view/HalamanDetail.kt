@@ -1,9 +1,13 @@
 package com.example.localapi.view
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -26,6 +30,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.localapi.R
 import com.example.localapi.modeldata.DataSiswa
@@ -186,4 +192,22 @@ fun DetailDataSiswa(
     }
 }
 
+@Composable
+private fun BarisDetailData(
+    @StringRes labelResID: Int,
+    itemDetail: String,
+    modifier: Modifier = Modifier
+) {
+    Row(modifier = modifier) {
+        Text(
+            text = stringResource(labelResID),
+            modifier = Modifier.weight(1f)
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Text(
+            text = itemDetail,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
 
